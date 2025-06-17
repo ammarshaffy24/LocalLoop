@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LocalLoop Icon Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .icon-item { text-align: center; }
+        button { padding: 10px 20px; margin: 5px; background: #10b981; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>LocalLoop PWA Icon Generator</h1>
+    <p>This generates all the required PWA icons for LocalLoop. Click "Generate All Icons" to create them.</p>
+    
+    <button onclick="generateAllIcons()">Generate All Icons</button>
+    <button onclick="downloadAll()">Download All</button>
+    
+    <div id="icons" class="icon-grid"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const canvases = {};
+
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#10b981');
+            gradient.addColorStop(1, '#059669');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Add rounded corners
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            const radius = size * 0.2;
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+
+            // Map pin icon
+            const pinSize = size * 0.6;
+            const pinX = (size - pinSize) / 2;
+            const pinY = (size - pinSize) / 2;
+
+            // Pin shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.beginPath();
+            ctx.ellipse(size/2 + 2, size/2 + pinSize/3 + 2, pinSize/4, pinSize/8, 0, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Pin body
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, pinSize/4, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Pin point
+            ctx.beginPath();
+            ctx.moveTo(size/2, size/2 + pinSize/4);
+            ctx.lineTo(size/2 - pinSize/8, size/2 + pinSize/3);
+            ctx.lineTo(size/2 + pinSize/8, size/2 + pinSize/3);
+            ctx.closePath();
+            ctx.fill();
+
+            // Inner circle
+            ctx.fillStyle = '#10b981';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, pinSize/8, 0, 2 * Math.PI);
+            ctx.fill();
+
+            return canvas;
+        }
+
+        function generateAllIcons() {
+            const iconsDiv = document.getElementById('icons');
+            iconsDiv.innerHTML = '';
+
+            sizes.forEach(size => {
+                const canvas = createIcon(size);
+                canvases[size] = canvas;
+
+                const div = document.createElement('div');
+                div.className = 'icon-item';
+                div.innerHTML = `
+                    <h3>${size}x${size}</h3>
+                    <div>${canvas.outerHTML}</div>
+                    <button onclick="downloadIcon(${size})">Download</button>
+                `;
+                iconsDiv.appendChild(div);
+            });
+        }
+
+        function downloadIcon(size) {
+            const canvas = canvases[size];
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function downloadAll() {
+            sizes.forEach(size => {
+                setTimeout(() => downloadIcon(size), size * 10);
+            });
+        }
+
+        // Auto-generate on load
+        generateAllIcons();
+    </script>
+</body>
+</html>
