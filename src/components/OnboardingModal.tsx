@@ -497,7 +497,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
       {/* Enhanced Backdrop */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-sm" />
       {/* Modal - Responsive: mobile optimized, desktop as before */}
-      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-6xl h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-screen-2xl h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0">
         {/* Enhanced Header with gradient - Mobile optimized */}
         <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:p-6 text-white overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
@@ -507,7 +507,9 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                 <MapPin className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
               </div>
               <div>
-                <h2 className="text-lg sm:text-2xl font-bold text-white drop-shadow-lg">Welcome to LocalLoop</h2>
+                <div className="flex items-center space-x-3">
+                  <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Welcome to LocalLoop</h2>
+                </div>
                 <p className="text-white/90 drop-shadow text-xs sm:text-base">Discover how local knowledge sharing works</p>
               </div>
             </div>
@@ -566,7 +568,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                   <p className="text-gray-600 leading-relaxed text-base">{currentStepData.description}</p>
                 </div>
                 {/* Step-specific content cards with dividers */}
-                {currentStep === 1 && (
+              {currentStep === 1 && (
                   <>
                     <div className="bg-blue-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
                       <div className="flex items-center justify-center mb-3">
@@ -574,25 +576,25 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                       </div>
                       <p className="font-bold text-blue-900 text-lg mb-2">Community-Driven</p>
                       <p className="text-blue-700 text-base">Real tips from real locals who know the area</p>
-                    </div>
+                      </div>
                     <div className="border-t border-gray-200 my-4"></div>
                     <div className="bg-emerald-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
                       <div className="flex items-center justify-center mb-3">
                         <TrendingUp className="h-7 w-7 text-emerald-600" />
-                      </div>
+                    </div>
                       <p className="font-bold text-emerald-900 text-lg mb-2">Trust-Based</p>
                       <p className="text-emerald-700 text-base">Tips get better with community validation</p>
-                    </div>
+                  </div>
                   </>
                 )}
                 {currentStep === 2 && (
                   <div className="bg-yellow-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
                     <div className="flex items-center justify-center mb-3">
                       <Target className="h-7 w-7 text-yellow-600" />
-                    </div>
+                      </div>
                     <p className="font-bold text-yellow-900 text-lg mb-2">See how it works!</p>
                     <p className="text-yellow-700 text-base">The tip creation modal shows automatically with a realistic example</p>
-                  </div>
+                      </div>
                 )}
                 {currentStep === 3 && (
                   <div className="bg-emerald-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
@@ -618,10 +620,108 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                   >
                     {currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'} <ArrowRight className="h-6 w-6 inline-block ml-1" />
                   </button>
-                </div>
+                      </div>
               </div>
-              {/* Desktop content remains unchanged (sm:block) */}
-              <div className="hidden sm:block">{/* ...existing desktop content... */}</div>
+              {/* Desktop content: restore original wide, side-by-side layout */}
+              <div className="hidden sm:block">
+                <div className="flex flex-row h-full w-full">
+                  {/* Left side: stepper, progress, and text */}
+                  <div className="w-1/2 flex flex-col justify-between p-8">
+                      <div>
+                      <div className="flex items-center space-x-4 mb-8">
+                        <div className="bg-white/20 backdrop-blur-sm p-3 rounded-2xl shadow-lg">
+                          <MapPin className="h-7 w-7 text-white" />
+                      </div>
+                        <div>
+                          <h2 className="text-2xl font-bold text-white sm:text-gray-900 sm:drop-shadow-none">Welcome to LocalLoop</h2>
+                          <p className="text-white/90 drop-shadow text-base">Discover how local knowledge sharing works</p>
+                    </div>
+                  </div>
+                      <div className="mb-8">
+                        <span className="text-sm font-semibold text-gray-700">Step {currentStep} of 3</span>
+                        <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full ml-4">
+                          {Math.round((currentStep / 3) * 100)}% complete
+                        </span>
+                        <div className="relative w-full bg-gray-200 rounded-full h-3 mt-2 overflow-hidden shadow-inner">
+                          <div 
+                            className={`h-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
+                            style={{ width: `${(currentStep / 3) * 100}%` }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
+                </div>
+                      </div>
+                      <div className="mb-8">
+                        <h3 className="text-3xl font-bold text-gray-900 leading-tight mb-2">{currentStepData.title}</h3>
+                        <p className={`text-xl bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent font-semibold mb-2`}>
+                          {currentStepData.subtitle}
+                        </p>
+                        <p className="text-gray-600 leading-relaxed text-lg">{currentStepData.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between pt-8 border-t border-gray-200">
+                      <button
+                        onClick={handlePrevious}
+                        disabled={currentStep === 1}
+                        className={`flex items-center space-x-2 px-6 py-3 rounded-2xl transition-all duration-200 font-semibold text-base ${currentStep === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700 hover:scale-105'}`}
+                      >
+                        <ArrowLeft className="h-4 w-4" />
+                        <span>Previous</span>
+                      </button>
+                      <button
+                        onClick={handleNext}
+                        className={`flex items-center space-x-3 px-8 py-4 bg-gradient-to-r ${currentStepData.gradient} hover:shadow-xl text-white rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg font-semibold text-lg`}
+                      >
+                        <span>{currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'}</span>
+                        <ArrowRight className="h-5 w-5" />
+                      </button>
+                  </div>
+                        </div>
+                  {/* Right side: feature card for current step */}
+                  <div className="w-1/2 flex items-center justify-center p-8">
+                    {currentStep === 1 && (
+                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
+                        <div className="bg-gradient-to-br from-blue-400 to-purple-600 p-6 rounded-2xl shadow-lg mb-6">
+                          <Users className="h-12 w-12 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Community Knowledge</h3>
+                        <p className="text-gray-600 leading-relaxed text-lg text-center">
+                          LocalLoop connects you with local insights from people who know the area best. 
+                          Discover shortcuts, hidden gems, and insider tips that make every neighborhood special.
+                        </p>
+                    </div>
+                  )}
+                    {currentStep === 2 && (
+                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
+                        <div className="bg-gradient-to-br from-emerald-400 to-teal-600 p-6 rounded-2xl shadow-lg mb-6">
+                          <MapPin className="h-12 w-12 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Realistic Tip Example</h3>
+                        <p className="text-gray-600 leading-relaxed text-lg text-center mb-6">
+                          See exactly how you'd share a real hidden gem with detailed information, timing, and photos.
+                        </p>
+                        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-emerald-200">
+                          <p className="text-sm text-emerald-700 font-medium">
+                            ✨ This shows a complete, realistic example of sharing a secret NYC rooftop garden!
+                          </p>
+                  </div>
+                </div>
+              )}
+              {currentStep === 3 && (
+                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
+                        <div className="bg-gradient-to-br from-orange-400 to-red-600 p-6 rounded-2xl shadow-lg mb-6">
+                          <TrendingUp className="h-12 w-12 text-white" />
+                          </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Community Validation</h3>
+                        <p className="text-gray-600 leading-relaxed text-lg text-center mb-6">
+                          When community members confirm tips, trust levels increase. 
+                          This creates a self-improving system where the best information rises to the top.
+                        </p>
+                        {/* Confirmation animation overlay can be added here if needed */}
+                    </div>
+                  )}
+                </div>
+                  </div>
+              </div>
             </div>
           </div>
 

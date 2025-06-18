@@ -98,18 +98,6 @@ const Header: React.FC<HeaderProps> = ({
                 </button>
               )}
               
-              {/* Help Button */}
-              {onShowOnboarding && (
-                <button
-                  onClick={onShowOnboarding}
-                  className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg transition-all duration-200 hover:scale-105 btn-hover"
-                  title="Show tutorial"
-                >
-                  <HelpCircle className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span className="hidden sm:inline text-sm font-medium">Tutorial</span>
-                </button>
-              )}
-              
               {/* Auth Section */}
               {authLoading ? (
                 <div className="w-6 h-6 sm:w-8 sm:h-8 animate-pulse bg-gray-200 rounded-full"></div>
@@ -139,6 +127,18 @@ const Header: React.FC<HeaderProps> = ({
                 >
                   <LogIn className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden sm:inline text-sm font-medium">Sign In</span>
+                </button>
+              )}
+
+              {/* Help Button */}
+              {onShowOnboarding && (
+                <button
+                  onClick={onShowOnboarding}
+                  className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg transition-all duration-200 hover:scale-105 btn-hover font-semibold"
+                  title="Show tutorial"
+                >
+                  <HelpCircle className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="inline text-sm font-medium">Tutorial</span>
                 </button>
               )}
             </div>
