@@ -470,19 +470,25 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
       title: "You're walking down a street...",
       subtitle: "Looking for a shortcut to avoid the crowds",
       description: "LocalLoop helps you discover local knowledge from people who know the area best. Every neighborhood has hidden gems, shortcuts, and insider tips that only locals know.",
-      gradient: "from-blue-400 to-purple-600"
+      gradient: "from-blue-400 to-purple-600",
+      cardTitle: "Community Knowledge",
+      cardDescription: "LocalLoop connects you with local insights from people who know the area best. Discover shortcuts, hidden gems, and insider tips that make every neighborhood special."
     },
     {
       title: "You know a shortcut!",
       subtitle: "See how easy it is to share local knowledge",
       description: "Share your knowledge with the community. Every local insight makes the neighborhood better for everyone. Your tip could save someone time, money, or help them discover something amazing.",
-      gradient: "from-emerald-400 to-teal-600"
+      gradient: "from-emerald-400 to-teal-600",
+      cardTitle: "Realistic Tip Example",
+      cardDescription: "See exactly how you'd share a real hidden gem with detailed information, timing, and photos."
     },
     {
       title: "Someone else confirms it!",
       subtitle: "Watch how community validation builds trust",
       description: "When others confirm your tip, it becomes more trusted and helps more people. This creates a self-improving system where the best tips rise to the top through community validation.",
-      gradient: "from-orange-400 to-red-600"
+      gradient: "from-orange-400 to-red-600",
+      cardTitle: "Community Validation",
+      cardDescription: "When community members confirm tips, trust levels increase. This creates a self-improving system where the best information rises to the top."
     }
   ];
 
@@ -497,7 +503,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
       {/* Enhanced Backdrop */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-sm" />
       {/* Modal - Responsive: mobile optimized, desktop as before */}
-      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-screen-2xl h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1800px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0">
         {/* Enhanced Header with gradient - Mobile optimized */}
         <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:p-6 text-white overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
@@ -622,105 +628,91 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                   </button>
                       </div>
               </div>
-              {/* Desktop content: restore original wide, side-by-side layout */}
-              <div className="hidden sm:block">
-                <div className="flex flex-row h-full w-full">
-                  {/* Left side: stepper, progress, and text */}
-                  <div className="w-1/2 flex flex-col justify-between p-8">
-                      <div>
-                      <div className="flex items-center space-x-4 mb-8">
-                        <div className="bg-white/20 backdrop-blur-sm p-3 rounded-2xl shadow-lg">
-                          <MapPin className="h-7 w-7 text-white" />
-                      </div>
-                        <div>
-                          <h2 className="text-2xl font-bold text-white sm:text-gray-900 sm:drop-shadow-none">Welcome to LocalLoop</h2>
-                          <p className="text-white/90 drop-shadow text-base">Discover how local knowledge sharing works</p>
+              {/* Desktop content: match screenshot exactly */}
+              <div className="hidden sm:flex flex-col w-full h-full">
+                {/* Header */}
+                <div className="flex items-center justify-between px-10 pt-8 pb-6 bg-gradient-to-r from-blue-400 to-purple-500 rounded-t-3xl">
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-white/20 p-4 rounded-2xl shadow-lg">
+                      <MapPin className="h-10 w-10 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold text-white">Welcome to LocalLoop</h2>
+                      <p className="text-white/90 text-lg">Discover how local knowledge sharing works</p>
                     </div>
                   </div>
-                      <div className="mb-8">
-                        <span className="text-sm font-semibold text-gray-700">Step {currentStep} of 3</span>
-                        <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full ml-4">
-                          {Math.round((currentStep / 3) * 100)}% complete
-                        </span>
-                        <div className="relative w-full bg-gray-200 rounded-full h-3 mt-2 overflow-hidden shadow-inner">
-                          <div 
-                            className={`h-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
-                            style={{ width: `${(currentStep / 3) * 100}%` }}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
+                  <button
+                    onClick={handleSkip}
+                    className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-xl text-lg transition-all duration-200 shadow-lg"
+                  >
+                    Skip Tutorial
+                  </button>
                 </div>
+                {/* Progress Bar */}
+                <div className="px-10 pt-4 pb-2 bg-white">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-base font-semibold text-gray-700">Step {currentStep} of 3</span>
+                    <span className="text-base text-gray-500 bg-gray-100 px-4 py-1 rounded-full">
+                      {Math.round((currentStep / 3) * 100)}% complete
+                    </span>
+                  </div>
+                  <div className="relative w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+                    <div 
+                      className={`h-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
+                      style={{ width: `${(currentStep / 3) * 100}%` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
+                  </div>
+                </div>
+                {/* Main Content: Side-by-side */}
+                <div className="flex flex-row flex-1 w-full h-full bg-white">
+                  {/* Left: Stepper and Text */}
+                  <div className="w-1/2 flex flex-col justify-center px-16 py-12">
+                    <div className="flex items-center space-x-6 mb-8">
+                      <div className="bg-gradient-to-br from-blue-400 to-purple-600 p-5 rounded-2xl shadow-lg">
+                        <span className="text-3xl font-bold text-white">{currentStep}</span>
                       </div>
-                      <div className="mb-8">
-                        <h3 className="text-3xl font-bold text-gray-900 leading-tight mb-2">{currentStepData.title}</h3>
-                        <p className={`text-xl bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent font-semibold mb-2`}>
+                      <div>
+                        <h3 className="text-4xl font-semibold text-gray-800 leading-tight mb-2">{currentStepData.title}</h3>
+                        <p className={`text-2xl bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent font-semibold mb-2`}>
                           {currentStepData.subtitle}
                         </p>
-                        <p className="text-gray-600 leading-relaxed text-lg">{currentStepData.description}</p>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between pt-8 border-t border-gray-200">
-                      <button
-                        onClick={handlePrevious}
-                        disabled={currentStep === 1}
-                        className={`flex items-center space-x-2 px-6 py-3 rounded-2xl transition-all duration-200 font-semibold text-base ${currentStep === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700 hover:scale-105'}`}
-                      >
-                        <ArrowLeft className="h-4 w-4" />
-                        <span>Previous</span>
-                      </button>
-                      <button
-                        onClick={handleNext}
-                        className={`flex items-center space-x-3 px-8 py-4 bg-gradient-to-r ${currentStepData.gradient} hover:shadow-xl text-white rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg font-semibold text-lg`}
-                      >
-                        <span>{currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'}</span>
-                        <ArrowRight className="h-5 w-5" />
-                      </button>
+                    <p className="text-gray-600 leading-relaxed text-xl mb-8">{currentStepData.description}</p>
                   </div>
-                        </div>
-                  {/* Right side: feature card for current step */}
-                  <div className="w-1/2 flex items-center justify-center p-8">
-                    {currentStep === 1 && (
-                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
-                        <div className="bg-gradient-to-br from-blue-400 to-purple-600 p-6 rounded-2xl shadow-lg mb-6">
-                          <Users className="h-12 w-12 text-white" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Community Knowledge</h3>
-                        <p className="text-gray-600 leading-relaxed text-lg text-center">
-                          LocalLoop connects you with local insights from people who know the area best. 
-                          Discover shortcuts, hidden gems, and insider tips that make every neighborhood special.
-                        </p>
+                  {/* Right: Feature Card */}
+                  <div className="w-1/2 flex items-center justify-center relative px-16 py-12">
+                    <div className="bg-blue-50 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg w-full">
+                      {/* Icon and Card Content only (no duplicate step title) */}
+                      <div className={`bg-gradient-to-br ${currentStepData.gradient} p-7 rounded-2xl shadow-lg mb-6`}>
+                        {currentStep === 1 && <Users className="h-14 w-14 text-white" />}
+                        {currentStep === 2 && <MapPin className="h-14 w-14 text-white" />}
+                        {currentStep === 3 && <TrendingUp className="h-14 w-14 text-white" />}
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900 mb-4">{currentStepData.cardTitle}</h3>
+                      <p className="text-gray-600 leading-relaxed text-xl text-center">{currentStepData.cardDescription}</p>
                     </div>
-                  )}
-                    {currentStep === 2 && (
-                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
-                        <div className="bg-gradient-to-br from-emerald-400 to-teal-600 p-6 rounded-2xl shadow-lg mb-6">
-                          <MapPin className="h-12 w-12 text-white" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Realistic Tip Example</h3>
-                        <p className="text-gray-600 leading-relaxed text-lg text-center mb-6">
-                          See exactly how you'd share a real hidden gem with detailed information, timing, and photos.
-                        </p>
-                        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-emerald-200">
-                          <p className="text-sm text-emerald-700 font-medium">
-                            ✨ This shows a complete, realistic example of sharing a secret NYC rooftop garden!
-                          </p>
                   </div>
                 </div>
-              )}
-              {currentStep === 3 && (
-                      <div className="bg-white/80 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg">
-                        <div className="bg-gradient-to-br from-orange-400 to-red-600 p-6 rounded-2xl shadow-lg mb-6">
-                          <TrendingUp className="h-12 w-12 text-white" />
-                          </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Community Validation</h3>
-                        <p className="text-gray-600 leading-relaxed text-lg text-center mb-6">
-                          When community members confirm tips, trust levels increase. 
-                          This creates a self-improving system where the best information rises to the top.
-                        </p>
-                        {/* Confirmation animation overlay can be added here if needed */}
-                    </div>
-                  )}
+                {/* Navigation Buttons */}
+                <div className="flex items-center justify-between px-10 py-8 bg-white border-t border-gray-200 rounded-b-3xl">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={currentStep === 1}
+                    className={`flex items-center space-x-2 px-7 py-4 rounded-2xl transition-all duration-200 font-semibold text-lg ${currentStep === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700 hover:scale-105'}`}
+                  >
+                    <ArrowLeft className="h-5 w-5" />
+                    <span>Previous</span>
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className={`flex items-center space-x-3 px-10 py-4 bg-gradient-to-r ${currentStepData.gradient} hover:shadow-xl text-white rounded-2xl transition-all duration-200 hover:scale-105 shadow-lg font-semibold text-xl`}
+                  >
+                    <span>{currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'}</span>
+                    <ArrowRight className="h-6 w-6" />
+                  </button>
                 </div>
-                  </div>
               </div>
             </div>
           </div>
