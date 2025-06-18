@@ -554,69 +554,69 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
             className="w-full sm:w-1/2 overflow-y-auto custom-scrollbar"
             onScroll={() => setShowScrollIndicator(false)}
           >
-            <div className="p-2 sm:p-8 space-y-4 sm:space-y-8">
+            <div className="p-2 sm:p-8 space-y-8 sm:space-y-8">
               <div className="sm:hidden">
                 {/* Step Title Card */}
-                <div className="bg-white/90 rounded-2xl shadow p-4 mb-4 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mb-2">
-                    <MapPin className="h-6 w-6 text-emerald-600" />
+                <div className="bg-white/90 rounded-2xl shadow p-8 mb-8 max-w-xs mx-auto flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+                    <MapPin className="h-8 w-8 text-emerald-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{currentStepData.title}</h3>
-                  <p className="text-base text-gray-700 font-semibold mb-1">{currentStepData.subtitle}</p>
-                  <p className="text-gray-600 leading-relaxed text-sm">{currentStepData.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{currentStepData.title}</h3>
+                  <p className="text-lg text-gray-700 font-semibold mb-2">{currentStepData.subtitle}</p>
+                  <p className="text-gray-600 leading-relaxed text-base">{currentStepData.description}</p>
                 </div>
-                {/* Step-specific content cards */}
+                {/* Step-specific content cards with dividers */}
                 {currentStep === 1 && (
-                  <div className="bg-blue-50 rounded-2xl shadow p-4 mb-4">
-                    <div className="flex items-center justify-center mb-2">
-                      <Users className="h-6 w-6 text-blue-600" />
+                  <>
+                    <div className="bg-blue-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
+                      <div className="flex items-center justify-center mb-3">
+                        <Users className="h-7 w-7 text-blue-600" />
+                      </div>
+                      <p className="font-bold text-blue-900 text-lg mb-2">Community-Driven</p>
+                      <p className="text-blue-700 text-base">Real tips from real locals who know the area</p>
                     </div>
-                    <p className="font-bold text-blue-900 text-base mb-1">Community-Driven</p>
-                    <p className="text-blue-700 text-sm">Real tips from real locals who know the area</p>
-                  </div>
-                )}
-                {currentStep === 1 && (
-                  <div className="bg-emerald-50 rounded-2xl shadow p-4 mb-4">
-                    <div className="flex items-center justify-center mb-2">
-                      <TrendingUp className="h-6 w-6 text-emerald-600" />
+                    <div className="border-t border-gray-200 my-4"></div>
+                    <div className="bg-emerald-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
+                      <div className="flex items-center justify-center mb-3">
+                        <TrendingUp className="h-7 w-7 text-emerald-600" />
+                      </div>
+                      <p className="font-bold text-emerald-900 text-lg mb-2">Trust-Based</p>
+                      <p className="text-emerald-700 text-base">Tips get better with community validation</p>
                     </div>
-                    <p className="font-bold text-emerald-900 text-base mb-1">Trust-Based</p>
-                    <p className="text-emerald-700 text-sm">Tips get better with community validation</p>
-                  </div>
+                  </>
                 )}
                 {currentStep === 2 && (
-                  <div className="bg-yellow-50 rounded-2xl shadow p-4 mb-4">
-                    <div className="flex items-center justify-center mb-2">
-                      <Target className="h-6 w-6 text-yellow-600" />
+                  <div className="bg-yellow-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
+                    <div className="flex items-center justify-center mb-3">
+                      <Target className="h-7 w-7 text-yellow-600" />
                     </div>
-                    <p className="font-bold text-yellow-900 text-base mb-1">See how it works!</p>
-                    <p className="text-yellow-700 text-sm">The tip creation modal shows automatically with a realistic example</p>
+                    <p className="font-bold text-yellow-900 text-lg mb-2">See how it works!</p>
+                    <p className="text-yellow-700 text-base">The tip creation modal shows automatically with a realistic example</p>
                   </div>
                 )}
-                {/* Add more cards for other step-specific content as needed */}
                 {currentStep === 3 && (
-                  <div className="bg-emerald-50 rounded-2xl shadow p-4 mb-4">
-                    <div className="flex items-center justify-center mb-2">
-                      <Heart className="h-6 w-6 text-emerald-600" />
+                  <div className="bg-emerald-50 rounded-2xl shadow p-6 mb-8 max-w-xs mx-auto">
+                    <div className="flex items-center justify-center mb-3">
+                      <Heart className="h-7 w-7 text-emerald-600" />
                     </div>
-                    <p className="font-bold text-emerald-900 text-base mb-1">Community Validation</p>
-                    <p className="text-emerald-700 text-sm">When others confirm your tip, trust increases and the best info rises to the top.</p>
+                    <p className="font-bold text-emerald-900 text-lg mb-2">Community Validation</p>
+                    <p className="text-emerald-700 text-base">When others confirm your tip, trust increases and the best info rises to the top.</p>
                   </div>
                 )}
-                {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-2">
+                {/* Navigation Buttons - sticky bottom for mobile */}
+                <div className="fixed bottom-0 left-0 w-full bg-white/95 p-4 border-t border-gray-200 flex items-center justify-between z-50 sm:hidden mt-8">
                   <button
                     onClick={handlePrevious}
                     disabled={currentStep === 1}
-                    className={`px-4 py-2 rounded-xl font-semibold text-xs ${currentStep === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+                    className={`px-5 py-3 rounded-xl font-semibold text-lg ${currentStep === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
                   >
-                    <ArrowLeft className="h-4 w-4 inline-block mr-1" /> Previous
+                    <ArrowLeft className="h-6 w-6 inline-block mr-1" /> Previous
                   </button>
                   <button
                     onClick={handleNext}
-                    className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold text-xs"
+                    className="px-5 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold text-lg"
                   >
-                    {currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'} <ArrowRight className="h-4 w-4 inline-block ml-1" />
+                    {currentStep === 3 ? 'Start Exploring LocalLoop' : 'Continue'} <ArrowRight className="h-6 w-6 inline-block ml-1" />
                   </button>
                 </div>
               </div>
