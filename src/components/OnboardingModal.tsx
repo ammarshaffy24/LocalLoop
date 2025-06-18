@@ -503,9 +503,9 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
       {/* Enhanced Backdrop */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-sm" />
       {/* Modal - Responsive: mobile optimized, desktop as before */}
-      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1400px] sm:min-w-[1000px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1800px] lg:max-w-[2200px] xl:max-w-[2600px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0 border border-gray-200">
         {/* Enhanced Header with gradient - Mobile optimized */}
-        <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:p-6 text-white overflow-hidden`}>
+        <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:px-8 sm:py-6 text-white overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
           <div className="relative flex items-center justify-between">
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -538,16 +538,16 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
         </div>
 
         {/* Enhanced Progress Bar - Mobile optimized */}
-        <div className="px-4 sm:px-8 py-3 sm:py-6 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+        <div className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <span className="text-xs sm:text-sm font-semibold text-gray-700">Step {currentStep} of 3</span>
             <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 sm:px-3 py-1 rounded-full">
               {Math.round((currentStep / 3) * 100)}% complete
             </span>
           </div>
-          <div className="relative w-full bg-gray-200 rounded-full h-2 sm:h-3 overflow-hidden shadow-inner">
+          <div className="relative w-full bg-gray-200 rounded-full h-2 sm:h-2.5 overflow-hidden shadow-inner">
             <div 
-              className={`h-2 sm:h-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
+              className={`h-2 sm:h-2.5 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
               style={{ width: `${(currentStep / 3) * 100}%` }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
@@ -626,61 +626,32 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
           </div>
 
           {/* DESKTOP ONLY */}
-          <div className="hidden sm:flex flex-1 flex-col w-full h-full">
-            {/* Top bar: Step number/title and Skip Tutorial */}
-            <div className="flex items-center justify-between px-10 pt-8 pb-2 bg-white">
-              <span className="text-lg font-bold text-gray-900">Welcome to LocalLoop<br /><span className='text-base font-normal text-white/90'>Discover how local knowledge sharing works</span></span>
-              <button
-                onClick={handleSkip}
-                className="px-8 py-5 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-xl text-xl shadow hover:scale-105 transition-all duration-200"
-              >
-                Skip Tutorial
-              </button>
-            </div>
-            {/* Progress Bar */}
-            <div className="flex items-center justify-between px-10 pb-6 bg-white">
-              <span className="text-base font-semibold text-gray-800">Step {currentStep} of 3</span>
-              <span className="text-base text-gray-500 bg-gray-100 px-4 py-1 rounded-full min-w-[110px] text-center">
-                {Math.round((currentStep / 3) * 100)}% complete
-              </span>
-            </div>
-            <div className="px-10 pb-6 bg-white">
-              <div className="relative w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
-                <div 
-                  className={`h-3 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
-                  style={{ width: `${(currentStep / 3) * 100}%` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
-              </div>
-            </div>
-            {/* Main Content: Side-by-side */}
-            <div className="flex flex-row flex-1 w-full h-full bg-white">
-              {/* Left: Stepper and Text */}
-              <div className="w-1/2 flex flex-col justify-center px-16 py-12">
-                <div className="flex items-center space-x-6 mb-8">
-                  <div className="bg-gradient-to-br from-blue-400 to-purple-600 p-5 rounded-2xl shadow-lg">
-                    <span className="text-3xl font-semibold text-white">{currentStep}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-4xl font-semibold text-gray-800 leading-tight mb-2">{currentStepData.title}</h3>
-                    <p className={`text-2xl bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent font-semibold mb-2`}>
-                      {currentStepData.subtitle}
-                    </p>
-                  </div>
+          <div className="hidden sm:flex flex-1 flex-row w-full h-full bg-white">
+            {/* Left: Stepper and Text */}
+            <div className="w-1/2 flex flex-col justify-center px-8 py-10">
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="bg-gradient-to-br from-blue-400 to-purple-600 p-4 rounded-2xl shadow-lg">
+                  <span className="text-2xl font-semibold text-white">{currentStep}</span>
                 </div>
-                <p className="text-gray-600 leading-relaxed text-xl mb-8">{currentStepData.description}</p>
-              </div>
-              {/* Right: Feature Card for current step */}
-              <div className="w-1/2 flex items-center justify-center relative px-16 py-12">
-                <div className="bg-blue-50 rounded-3xl shadow-2xl p-12 flex flex-col items-center max-w-lg w-full">
-                  <div className={`bg-gradient-to-br ${currentStepData.gradient} p-7 rounded-2xl shadow-lg mb-6`}>
-                    {currentStep === 1 && <Users className="h-14 w-14 text-white" />}
-                    {currentStep === 2 && <MapPin className="h-14 w-14 text-white" />}
-                    {currentStep === 3 && <TrendingUp className="h-14 w-14 text-white" />}
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">{currentStepData.cardTitle}</h3>
-                  <p className="text-gray-600 leading-relaxed text-xl text-center">{currentStepData.cardDescription}</p>
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-800 leading-tight mb-1">{currentStepData.title}</h3>
+                  <p className={`text-lg bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent font-semibold mb-1`}>
+                    {currentStepData.subtitle}
+                  </p>
                 </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed text-base mb-6">{currentStepData.description}</p>
+            </div>
+            {/* Right: Feature Card for current step */}
+            <div className="w-1/2 flex items-center justify-center relative px-8 py-10">
+              <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center max-w-md w-full border border-gray-100">
+                <div className={`bg-gradient-to-br ${currentStepData.gradient} p-5 rounded-2xl shadow-lg mb-4`}>
+                  {currentStep === 1 && <Users className="h-10 w-10 text-white" />}
+                  {currentStep === 2 && <MapPin className="h-10 w-10 text-white" />}
+                  {currentStep === 3 && <TrendingUp className="h-10 w-10 text-white" />}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{currentStepData.cardTitle}</h3>
+                <p className="text-gray-600 leading-relaxed text-base text-center">{currentStepData.cardDescription}</p>
               </div>
             </div>
           </div>
