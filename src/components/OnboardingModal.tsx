@@ -165,7 +165,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
             <div className="flex flex-col sm:flex-row min-h-full">
               {/* Visual Demo (mobile: full width, desktop: half width) */}
               <div className="w-full sm:w-1/2 p-4 sm:p-6 sm:sticky sm:top-0 flex-shrink-0">
-                <div className="w-full aspect-[4/3] sm:aspect-auto sm:h-[calc(100vh-280px)] flex flex-col justify-center items-center rounded-2xl shadow-xl border border-gray-200 relative bg-gradient-to-br from-gray-50 to-white">
+                <div className="w-full h-[350px] sm:h-[calc(100vh-280px)] flex flex-col justify-center items-center rounded-2xl shadow-xl border border-gray-200 relative bg-gradient-to-br from-gray-50 to-white">
                   {/* Step 1: Walking Scenario */}
                   {currentStep === 1 && (
                     <div className="h-full w-full flex flex-col items-center justify-center p-8 overflow-hidden">
@@ -253,8 +253,8 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
               </div>
 
               {/* Instructions (mobile: full width, desktop: half width) */}
-              <div className="w-full sm:w-1/2 p-4 sm:p-8">
-                <div className="space-y-6 sm:space-y-8 sm:pl-8">
+              <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col">
+                <div className="flex-1 space-y-6 sm:space-y-8 sm:pl-8">
                   {/* Step Content */}
                   <div className="space-y-4">
                     <h2 className="text-3xl font-bold text-gray-900">{currentStepData.title}</h2>
@@ -273,9 +273,11 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
                       </div>
                     ))}
                   </div>
+                </div>
 
-                  {/* Navigation */}
-                  <div className="flex items-center justify-between pt-4 sm:pt-8">
+                {/* Navigation - Fixed at bottom */}
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between">
                     <button
                       onClick={handlePrevious}
                       className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-colors ${
@@ -291,9 +293,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
 
                     <button
                       onClick={handleNext}
-                      className={`flex items-center space-x-2 px-6 py-2 rounded-xl text-white transition-all ${
-                        currentStepData.gradient
-                      } hover:shadow-lg`}
+                      className={`flex items-center space-x-2 px-6 py-2 rounded-xl text-white transition-all bg-gradient-to-r ${currentStepData.gradient} hover:shadow-lg`}
                     >
                       <span>{currentStep === totalSteps ? 'Get Started' : 'Next'}</span>
                       <ArrowRight className="h-4 w-4" />
