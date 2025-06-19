@@ -110,7 +110,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
       <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-sm" onClick={onClose} />
       
       {/* Modal - Responsive: mobile optimized, desktop as before */}
-      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1800px] lg:max-w-[2200px] xl:max-w-[2600px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0 border border-gray-200">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1800px] lg:max-w-[2200px] xl:max-w-[2600px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-0 border border-gray-200">
         {/* Enhanced Header with gradient - Mobile optimized */}
         <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:px-8 sm:py-6 text-white overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
@@ -160,148 +160,146 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
 
         {/* Content - Mobile optimized layout */}
         <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
-          {/* Mobile: Visual Demo on top, Instructions below. Desktop: side by side */}
-          {/* Visual Demo (mobile: order-first, desktop: order-none) */}
-          <div className="w-full sm:w-1/2 p-4 sm:p-6 relative order-1 sm:order-none flex justify-center items-center">
-            <div className="h-full w-full sm:max-w-xl sm:max-h-[80vh] flex flex-col justify-center items-center rounded-2xl overflow-auto shadow-xl border border-gray-200 relative bg-gradient-to-br from-gray-50 to-white">
-              {/* Step 1: Walking Scenario */}
-              {currentStep === 1 && (
-                <div className="h-full flex flex-col items-center justify-center p-8">
-                  <div className="text-center space-y-6">
-                    <div className={`bg-gradient-to-br ${currentStepData.gradient} p-8 rounded-3xl shadow-2xl mx-auto w-fit`}>
-                      <Globe className="h-16 w-16 text-white" />
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-2xl font-bold text-gray-900">Local Knowledge</h4>
-                      <p className="text-gray-600">Discover shortcuts and hidden gems</p>
-                    </div>
-                    <div className="flex justify-center space-x-4">
-                      <div className="bg-white p-4 rounded-xl shadow-lg border">
-                        <MapPin className="h-8 w-8 text-blue-500" />
-                        <p className="text-sm font-medium mt-2">Shortcuts</p>
-                      </div>
-                      <div className="bg-white p-4 rounded-xl shadow-lg border">
-                        <Users className="h-8 w-8 text-emerald-500" />
-                        <p className="text-sm font-medium mt-2">Community</p>
-                      </div>
-                      <div className="bg-white p-4 rounded-xl shadow-lg border">
-                        <Shield className="h-8 w-8 text-purple-500" />
-                        <p className="text-sm font-medium mt-2">Trusted</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {/* Step 2: Community Knowledge */}
-              {currentStep === 2 && (
-                <div className="h-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-emerald-50 to-teal-50">
-                  <div className="text-center space-y-6">
-                    <div className={`bg-gradient-to-br ${currentStepData.gradient} p-6 rounded-2xl shadow-lg mx-auto w-fit`}>
-                      <Users className="h-12 w-12 text-white" />
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-2xl font-bold text-gray-900">Community Knowledge</h4>
-                      <p className="text-gray-600">Learn from local experts</p>
-                    </div>
-                    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-emerald-200 max-w-sm mx-auto">
-                      <div className="flex items-center space-x-3 mb-3">
-                        <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-                        <span className="font-medium text-emerald-700">Local Insights</span>
-                      </div>
-                      <p className="text-sm text-gray-600">Discover hidden gems and shortcuts that only locals know about.</p>
-                      <div className="flex items-center space-x-2 mt-3">
-                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Tips & Tricks</span>
-                        <span className="text-xs text-gray-500">• Verified by locals</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {/* Step 3: Community-Driven */}
-              {currentStep === 3 && (
-                <div className="h-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-orange-50 to-red-50">
-                  <div className="text-center space-y-6">
-                    <div className={`bg-gradient-to-br ${currentStepData.gradient} p-6 rounded-2xl shadow-lg mx-auto w-fit`}>
-                      <MessageSquare className="h-12 w-12 text-white" />
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-2xl font-bold text-gray-900">Share Your Knowledge</h4>
-                      <p className="text-gray-600">Help others discover your neighborhood</p>
-                    </div>
-                    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-orange-200 max-w-sm mx-auto">
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-3">
-                          <Tag className="h-5 w-5 text-orange-500" />
-                          <span className="font-medium text-orange-700">Hidden Gems</span>
+          {/* Single scrollable container for mobile */}
+          <div className="flex-1 overflow-auto">
+            <div className="flex flex-col sm:flex-row min-h-full">
+              {/* Visual Demo (mobile: full width, desktop: half width) */}
+              <div className="w-full sm:w-1/2 p-4 sm:p-6 sm:sticky sm:top-0 flex-shrink-0">
+                <div className="w-full aspect-[4/3] sm:aspect-auto sm:h-[calc(100vh-280px)] flex flex-col justify-center items-center rounded-2xl shadow-xl border border-gray-200 relative bg-gradient-to-br from-gray-50 to-white">
+                  {/* Step 1: Walking Scenario */}
+                  {currentStep === 1 && (
+                    <div className="h-full w-full flex flex-col items-center justify-center p-8 overflow-hidden">
+                      <div className="text-center space-y-6 max-w-md">
+                        <div className={`bg-gradient-to-br ${currentStepData.gradient} p-8 rounded-3xl shadow-2xl mx-auto w-fit`}>
+                          <Globe className="h-16 w-16 text-white" />
                         </div>
-                        <div className="text-left">
-                          <p className="text-sm text-gray-700 font-medium mb-2">Share your favorite spots</p>
-                          <p className="text-sm text-gray-600">Help others discover what makes your neighborhood special</p>
+                        <div className="space-y-4">
+                          <h4 className="text-2xl font-bold text-gray-900">Local Knowledge</h4>
+                          <p className="text-gray-600">Discover shortcuts and hidden gems</p>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <Camera className="h-4 w-4 text-gray-400" />
-                          <span className="text-xs text-gray-500">Add photos and details</span>
+                        <div className="flex justify-center space-x-4">
+                          <div className="bg-white p-4 rounded-xl shadow-lg border">
+                            <MapPin className="h-8 w-8 text-blue-500" />
+                            <p className="text-sm font-medium mt-2">Shortcuts</p>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl shadow-lg border">
+                            <Users className="h-8 w-8 text-emerald-500" />
+                            <p className="text-sm font-medium mt-2">Community</p>
+                          </div>
+                          <div className="bg-white p-4 rounded-xl shadow-lg border">
+                            <Shield className="h-8 w-8 text-purple-500" />
+                            <p className="text-sm font-medium mt-2">Trusted</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          {/* Instructions/Features/Navigation (mobile: order-last, desktop: order-none) */}
-          <div className="w-full sm:w-1/2 p-4 sm:p-8 overflow-y-auto order-2 sm:order-none">
-            <div className="space-y-6 sm:space-y-8">
-              {/* Step Content */}
-              <div className="space-y-4 sm:space-y-6">
-                <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                    {currentStepData.title}
-                  </h3>
-                  <p className="text-lg sm:text-xl text-gray-600 mb-4">
-                    {currentStepData.subtitle}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    {currentStepData.description}
-                  </p>
-                </div>
-                {/* Features List */}
-                <div className="space-y-3">
-                  {currentStepData.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className={`bg-gradient-to-r ${currentStepData.gradient} p-1 rounded-full`}>
-                        <Check className="h-4 w-4 text-white" />
+                  )}
+                  {/* Step 2: Community Knowledge */}
+                  {currentStep === 2 && (
+                    <div className="h-full w-full flex flex-col items-center justify-center p-8 overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50">
+                      <div className="text-center space-y-6 max-w-md">
+                        <div className={`bg-gradient-to-br ${currentStepData.gradient} p-6 rounded-2xl shadow-lg mx-auto w-fit`}>
+                          <Users className="h-12 w-12 text-white" />
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="text-2xl font-bold text-gray-900">Community Knowledge</h4>
+                          <p className="text-gray-600">Learn from local experts</p>
+                        </div>
+                        <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-emerald-200 max-w-sm mx-auto">
+                          <div className="flex items-center space-x-3 mb-3">
+                            <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+                            <span className="font-medium text-emerald-700">Local Insights</span>
+                          </div>
+                          <p className="text-sm text-gray-600">Discover hidden gems and shortcuts that only locals know about.</p>
+                          <div className="flex items-center space-x-2 mt-3">
+                            <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Tips & Tricks</span>
+                            <span className="text-xs text-gray-500">• Verified by locals</span>
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-gray-700 font-medium">{feature}</span>
                     </div>
-                  ))}
+                  )}
+                  {/* Step 3: Community-Driven */}
+                  {currentStep === 3 && (
+                    <div className="h-full w-full flex flex-col items-center justify-center p-8 overflow-hidden bg-gradient-to-br from-orange-50 to-red-50">
+                      <div className="text-center space-y-6 max-w-md">
+                        <div className={`bg-gradient-to-br ${currentStepData.gradient} p-6 rounded-2xl shadow-lg mx-auto w-fit`}>
+                          <MessageSquare className="h-12 w-12 text-white" />
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="text-2xl font-bold text-gray-900">Share Your Knowledge</h4>
+                          <p className="text-gray-600">Help others discover your neighborhood</p>
+                        </div>
+                        <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl border border-orange-200 max-w-sm mx-auto">
+                          <div className="space-y-4">
+                            <div className="flex items-center space-x-3">
+                              <Tag className="h-5 w-5 text-orange-500" />
+                              <span className="font-medium text-orange-700">Hidden Gems</span>
+                            </div>
+                            <div className="text-left">
+                              <p className="text-sm text-gray-700 font-medium mb-2">Share your favorite spots</p>
+                              <p className="text-sm text-gray-600">Help others discover what makes your neighborhood special</p>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Camera className="h-4 w-4 text-gray-400" />
+                              <span className="text-xs text-gray-500">Add photos and details</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-              {/* Navigation */}
-              <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                <button
-                  onClick={handlePrevious}
-                  disabled={currentStep === 1}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-200 ${
-                    currentStep === 1
-                      ? 'text-gray-400 cursor-not-allowed'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  <span>Previous</span>
-                </button>
-                <button
-                  onClick={handleNext}
-                  className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-                    currentStep === totalSteps
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-lg'
-                      : `bg-gradient-to-r ${currentStepData.gradient} text-white hover:shadow-lg`
-                  }`}
-                >
-                  <span>{currentStep === totalSteps ? 'Get Started' : 'Next'}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </button>
+
+              {/* Instructions (mobile: full width, desktop: half width) */}
+              <div className="w-full sm:w-1/2 p-4 sm:p-8">
+                <div className="space-y-6 sm:space-y-8 sm:pl-8">
+                  {/* Step Content */}
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-bold text-gray-900">{currentStepData.title}</h2>
+                    <p className="text-xl text-gray-600">{currentStepData.subtitle}</p>
+                    <p className="text-gray-600 leading-relaxed">{currentStepData.description}</p>
+                  </div>
+
+                  {/* Features List */}
+                  <div className="space-y-4">
+                    {currentStepData.features.map((feature, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <div className={`p-1 rounded-full bg-gradient-to-r ${currentStepData.gradient}`}>
+                          <Check className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Navigation */}
+                  <div className="flex items-center justify-between pt-4 sm:pt-8">
+                    <button
+                      onClick={handlePrevious}
+                      className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-colors ${
+                        currentStep === 1
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                      disabled={currentStep === 1}
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      <span>Previous</span>
+                    </button>
+
+                    <button
+                      onClick={handleNext}
+                      className={`flex items-center space-x-2 px-6 py-2 rounded-xl text-white transition-all ${
+                        currentStepData.gradient
+                      } hover:shadow-lg`}
+                    >
+                      <span>{currentStep === totalSteps ? 'Get Started' : 'Next'}</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
