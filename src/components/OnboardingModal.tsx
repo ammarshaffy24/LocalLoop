@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { X, MapPin, Users, TrendingUp, ArrowRight, ArrowLeft, Check, ChevronDown, Sparkles, Target, Heart, MessageSquare, Tag, Camera, Upload, Trash2, Play, Zap, Globe, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, MapPin, Users, ArrowRight, ArrowLeft, Check, MessageSquare, Tag, Camera, Globe, Shield } from 'lucide-react';
 
 interface OnboardingModalProps {
   isOpen: boolean;
@@ -105,18 +105,14 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[3000] flex items-center justify-center p-4">
-      {/* Modern Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-md"
-        onClick={onClose}
-      />
+    <div className="fixed inset-0 z-[3000] flex items-center justify-center p-2 sm:p-4">
+      {/* Enhanced Backdrop */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-sm" onClick={onClose} />
       
-      {/* Modal Container */}
-      <div className={`relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden transition-all duration-300 ${isAnimating ? 'scale-95 opacity-50' : 'scale-100 opacity-100'}`}>
-        
-        {/* Header */}
-        <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-6 text-white overflow-hidden`}>
+      {/* Modal - Responsive: mobile optimized, desktop as before */}
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-[1800px] lg:max-w-[2200px] xl:max-w-[2600px] h-[95vh] sm:h-[90vh] flex flex-col overflow-hidden p-4 sm:p-0 border border-gray-200">
+        {/* Enhanced Header with gradient - Mobile optimized */}
+        <div className={`relative bg-gradient-to-r ${currentStepData.gradient} p-4 sm:px-8 sm:py-6 text-white overflow-hidden`}>
           <div className="absolute inset-0 bg-black/10" />
           <div className="relative flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -146,34 +142,34 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="px-6 py-4 bg-gray-50 border-b border-gray-100">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-gray-700">Progress</span>
-            <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border">
+        {/* Enhanced Progress Bar - Mobile optimized */}
+        <div className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-50 to-white border-b border-gray-100">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <span className="text-xs sm:text-sm font-semibold text-gray-700">Step {currentStep} of {totalSteps}</span>
+            <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 sm:px-3 py-1 rounded-full">
               {Math.round((currentStep / totalSteps) * 100)}% complete
             </span>
           </div>
-          <div className="relative w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+          <div className="relative w-full bg-gray-200 rounded-full h-2 sm:h-2.5 overflow-hidden shadow-inner">
             <div 
-              className={`h-2 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out`}
+              className={`h-2 sm:h-2.5 bg-gradient-to-r ${currentStepData.gradient} rounded-full transition-all duration-700 ease-out shadow-sm`}
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             />
           </div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 flex overflow-hidden">
+        {/* Content - Mobile optimized layout */}
+        <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
           {/* Left Side - Text Content */}
-          <div className="w-1/2 p-8 overflow-y-auto">
-            <div className="space-y-8">
+          <div className="w-full sm:w-1/2 p-4 sm:p-8 overflow-y-auto">
+            <div className="space-y-6 sm:space-y-8">
               {/* Step Content */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     {currentStepData.title}
                   </h3>
-                  <p className="text-xl text-gray-600 mb-4">
+                  <p className="text-lg sm:text-xl text-gray-600 mb-4">
                     {currentStepData.subtitle}
                   </p>
                   <p className="text-gray-700 leading-relaxed">
@@ -225,7 +221,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose, onCo
           </div>
 
           {/* Right Side - Visual Demo */}
-          <div className="w-1/2 p-6 relative">
+          <div className="w-full sm:w-1/2 p-4 sm:p-6 relative">
             <div className="h-full rounded-2xl overflow-hidden shadow-xl border border-gray-200 relative bg-gradient-to-br from-gray-50 to-white">
               
               {/* Step 1: Walking Scenario */}
